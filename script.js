@@ -39,18 +39,40 @@ class Tree {
         return node;
     }
     find(data){
-        this.root=this.findRecursive(this.root,data);
+       return this.findRecursive(this.root,data);
     }
     findRecursive(node,data){
-        if(data===node.value || node ==null){
+        if(node === null || data === node.data ){
             return node;
         }
         if(data<node.data){
-            node.left=this.findRecursive(node.left,data);
+            return this.findRecursive(node.left,data);
         }
         else if(data > node.data){
-            node.right = this.findRecursive(node.right,data);
+           return this.findRecursive(node.right,data);
         }
-        return node;
+        return null;
     }
+    depth(data){
+        let count =0
+        return this.finddepth(this.root,data,count);
+    }
+    finddepth(node,data,count){
+        if(node ===null){
+            return -1;
+        }
+        if(data===node.data){
+            return count;
+        }
+        if(data<node.data){
+            count++;
+            return this.finddepth(node.left,data,count);
+        }
+        else if(data > node.data){
+            count++
+            return this.finddepth(node.right,data,count);
+        }
+        return -1;
+    }
+
 }

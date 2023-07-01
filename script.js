@@ -38,10 +38,19 @@ class Tree {
     
         return node;
     }
-    deleteElement(value){
-
+    find(data){
+        this.root=this.findRecursive(this.root,data);
     }
-    find(value){
-
+    findRecursive(node,data){
+        if(data===node.value || node ==null){
+            return node;
+        }
+        if(data<node.data){
+            node.left=this.findRecursive(node.left,data);
+        }
+        else if(data > node.data){
+            node.right = this.findRecursive(node.right,data);
+        }
+        return node;
     }
 }

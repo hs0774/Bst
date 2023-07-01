@@ -23,10 +23,7 @@ class Tree {
         node.right=this.buildTree(array,mid+1,end);
         return node;
     }
-    insertElement(data){
-        this.root = this.insertRecursive(this.root, data);
-    }
-    insertRecursive(node,data){
+    insertRecursive(node=this.root,data){
         if(node===null){
             return new Node(data);
         }
@@ -38,10 +35,36 @@ class Tree {
     
         return node;
     }
-    find(data){
-       return this.findRecursive(this.root,data);
+    deleteNodeRecursive(node=this.root,data){
+        if(node===null){
+            return null;
+        }
+        if (data < node.data) {
+             node.left = this.deleteNodeRecursive(node.left, data);
+        } else if (data > node.data) {
+              node.right = this.deleteNodeRecursive(node.right, data);
+        } else {
+            if(node.left===null){
+                return node.right;
+            }
+            if(node.right===null){
+                return node.left;
+            }
+    
+            let minNode = this.findMinNode(node.right);
+            node.data= minNode.data;
+            node.right=this.deleteNodeRecursive(node.right,minNode.data);
+       }
+        
+       return node;
     }
-    findRecursive(node,data){
+    findMinNode(node) {
+        if (node.left === null) {
+            return node;
+        }
+        return this.findMinNode(node.left);
+    }
+    findRecursive(node=this.root,data){
         if(node === null || data === node.data ){
             return node;
         }
@@ -54,7 +77,7 @@ class Tree {
         return null;
     }
     depth(data){
-        let count =0
+        let count =0;
         return this.finddepth(this.root,data,count);
     }
     finddepth(node,data,count){
@@ -74,5 +97,6 @@ class Tree {
         }
         return -1;
     }
+
 
 }

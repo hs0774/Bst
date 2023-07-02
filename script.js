@@ -115,16 +115,16 @@ class Tree {
         }
     }
     inorder(node=this.root){
-        if(node ===null){
+        if(node === null){
             return null;
         }
-        
+
         this.inorder(node.left);
         console.log(node.data);
         this.inorder(node.right);
     }
     preorder(node=this.root){
-        if(node ===null){
+        if(node === null){
             return null;
         }
 
@@ -133,7 +133,7 @@ class Tree {
         this.preorder(node.right);
     }
     postorder(node=this.root){
-        if(node ===null){
+        if(node === null){
             return null;
         }
 
@@ -141,6 +141,16 @@ class Tree {
         this.postorder(node.right);
         console.log(node.data);
     }
+    height(node = this.root){
+        if(node === null){
+            return -1;
+        }
+        let leftHeight = this.height(node.left);
+        let rightHeight = this.height(node.right);
+
+        return Math.max(leftHeight,rightHeight)+1;
+    }
+    
 }
 
 class Queue {

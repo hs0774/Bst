@@ -97,6 +97,36 @@ class Tree {
         }
         return -1;
     }
+    levelOrder(node=this.root){
+        if(node===null){
+            return;
+        }
+        const queue = new Queue();
+        queue.enqueue(node);
+        while(!queue.isEmpty()){
+            const current = queue.dequeue();
+            console.log(current.data);
+            if(node.left!=null){
+            queue.enqueue(current.left);
+            }
+            if(node.right !=null){
+            queue.enqueue(current.right);
+            }
+        }
+    }
+}
 
-
+class Queue {
+    constructor(){
+        this.items=[];
+    }
+    enqueue(element){
+        this.items.push(element);
+    }
+    dequeue(){
+        return this.items.shift();
+    }
+    get isEmpty() {
+        return this.items.length === 0;
+      }
 }

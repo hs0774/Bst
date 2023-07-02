@@ -150,7 +150,20 @@ class Tree {
 
         return Math.max(leftHeight,rightHeight)+1;
     }
-    
+    isbalanced(node = this.root){
+        if(node === null){
+            return;
+        }
+        let leftHeight = node.left;
+        let rightHeight = node.right;
+        if(Math.abs(this.height(leftHeight) - this.height(rightHeight)) <= 1 ){
+            console.log('Balanced')
+            return true;
+        }else{
+            console.log('Not balanced');
+            return false;
+        }
+    }
 }
 
 class Queue {

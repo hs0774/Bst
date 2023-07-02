@@ -106,10 +106,10 @@ class Tree {
         while(!queue.isEmpty()){
             const current = queue.dequeue();
             console.log(current.data);
-            if(node.left!=null){
+            if(current.left!=null){
             queue.enqueue(current.left);
             }
-            if(node.right !=null){
+            if(current.right !=null){
             queue.enqueue(current.right);
             }
         }
@@ -154,13 +154,12 @@ class Tree {
         if(node === null){
             return;
         }
-        let leftHeight = node.left;
-        let rightHeight = node.right;
-        if(Math.abs(this.height(leftHeight) - this.height(rightHeight)) <= 1 ){
-            console.log('Balanced')
+        let leftHeight = this.height(node.left);
+        let rightHeight = this.height(node.right);
+        if(Math.abs(leftHeight - rightHeight) <= 1 ){
+            // console.log('Balanced');
             return true;
         }else{
-            console.log('Not balanced');
             return false;
         }
     }
@@ -169,8 +168,10 @@ class Tree {
         if (check === false){
             let inOrderStore = [];
             this.inorderBalanceHelper(node,inOrderStore);
-            this.buildTree(inOrderStore,0,inOrderStore.length-1);
+            this.root=this.buildTree(inOrderStore,0,inOrderStore.length-1);
+            console.log('balanced');
         }else {
+            console.log('tree was already balanced');
             return;
         }
     }
@@ -179,9 +180,9 @@ class Tree {
             return null;
         }
 
-        this.inorderBalanceHelper(node.left);
+        this.inorderBalanceHelper(node.left,inOrderStore);
         inOrderStore.push(node.data);
-        this.inorderBalanceHelper(node.right);
+        this.inorderBalanceHelper(node.right,inOrderStore);
     }
 }
 
@@ -199,3 +200,20 @@ class Queue {
         return this.items.length === 0;
       }
 }
+
+
+let TestArray = [1,2,3,4,5,6,7,8,9,0];
+let bst = new Tree(TestArray);
+bst.isbalanced();
+bst.preorder();
+bst.postorder();
+bst.inorder();
+bst.insertRecursive(bst.root,10);
+bst.insertRecursive(bst.root,11);
+bst.insertRecursive(bst.root,12);
+console.log(bst.isbalanced()); 
+bst.rebalance(); 
+console.log(bst.isbalanced());
+bst.preorder();
+bst.postorder();
+bst.inorder();

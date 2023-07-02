@@ -164,6 +164,25 @@ class Tree {
             return false;
         }
     }
+    rebalance(node = this.root){
+        let check = this.isbalanced(node);
+        if (check === false){
+            let inOrderStore = [];
+            this.inorderBalanceHelper(node,inOrderStore);
+            this.buildTree(inOrderStore,0,inOrderStore.length-1);
+        }else {
+            return;
+        }
+    }
+    inorderBalanceHelper(node,inOrderStore){
+        if(node === null){
+            return null;
+        }
+
+        this.inorderBalanceHelper(node.left);
+        inOrderStore.push(node.data);
+        this.inorderBalanceHelper(node.right);
+    }
 }
 
 class Queue {

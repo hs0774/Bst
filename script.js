@@ -114,6 +114,33 @@ class Tree {
             }
         }
     }
+    inorder(node=this.root){
+        if(node ===null){
+            return null;
+        }
+        
+        this.inorder(node.left);
+        console.log(node.data);
+        this.inorder(node.right);
+    }
+    preorder(node=this.root){
+        if(node ===null){
+            return null;
+        }
+
+        console.log(node.data);
+        this.preorder(node.left);
+        this.preorder(node.right);
+    }
+    postorder(node=this.root){
+        if(node ===null){
+            return null;
+        }
+
+        this.postorder(node.left);
+        this.postorder(node.right);
+        console.log(node.data);
+    }
 }
 
 class Queue {
